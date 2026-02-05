@@ -1,22 +1,34 @@
+"use client";
+
 import Button from "@/components/Button";
 import designExample1Image from "@/assets/images/design-example-1.png";
 import designExample2Image from "@/assets/images/design-example-2.png";
 import Image from "next/image";
 import Pointer from "@/components/Pointer";
+import { motion, useAnimate } from "framer-motion";
+import { useEffect } from "react";
 
 export default function Hero() {
+  const [leftDesignScope, leftDesignAnimate] = useAnimate();
+  const [leftPointerScope, leftPointerAnimate] = useAnimate();
+
+  useEffect(() => {
+    leftDesignAnimate(
+      [leftDesignScope.current, {opacity: [0, 1] }, {duration: 0.5}],
+    ]);
   return (
     <section className="py-24 overflow-hidden">
       <div className="container relative">
-        <div className="absolute -left-32 top-16 hidden lg:block">
+        <motion.div ref={leftDesignScope} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }} className="absolute -left-32 top-16 hidden lg:block">
           <Image src={designExample1Image} alt="Design example 1 image" />
-        </div>
-        <div className="absolute -right-64 -top-16 hidden lg:block">
-          <Image src={designExample2Image} alt="Design example 2 image" />
-        </div>
-        <div className="absolute left-56 top-96 hidden lg:block">
+        </motion.div>
+        <motion.div ref={leftPointerScope} className="absolute left-56 top-96 hidden lg:block">
           <Pointer name="Andrea" />
-        </div>
+        </motion.div>
+
+        <motion.div className="absolute -right-64 -top-16 hidden lg:block">
+          <Image src={designExample2Image} alt="Design example 2 image" />
+        </motion.div>
         <div className="absolute right-80 -top-4 hidden lg:block">
           <Pointer name="Michael" color="red" />
         </div>
