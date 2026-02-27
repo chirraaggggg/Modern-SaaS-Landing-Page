@@ -13,7 +13,7 @@ export default function Footer() {
       <div className="container">
         <div className="flex flex-col md:flex-row items-center md:justify-between gap-6 px-4">
           <div className="flex-shrink-0">
-            <Image src={logoImage} alt="Layers logo" className="h-8 w-auto" />
+            <Image src={logoImage} alt="Zuna logo" className="h-8 w-auto" />
           </div>
           <div className="flex-shrink-0">
             <nav className="flex gap-4 sm:gap-6 flex-wrap justify-center">

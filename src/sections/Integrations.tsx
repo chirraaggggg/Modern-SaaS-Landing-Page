@@ -54,7 +54,7 @@ export default function Integrations() {
               Plays well with <span className="text-lime-400">others</span>
             </h2>
             <p className="text-white/50 mt-4 text-sm sm:text-base md:text-lg">
-              Layers seamlessly connects with your favorite tools, making it
+              Zuna seamlessly connects with your favorite tools, making it
               easy to plug into any workflow and collaborate across platforms.
             </p>
           </div>

@@ -1,0 +1,82 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="blur1" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a3e635;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#84cc16;stop-opacity:0.15"/>
+    </linearGradient>
+    <linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ec4899;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#db2777;stop-opacity:0.15"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="400" height="300" rx="16" fill="#171717"/>
+  
+  <!-- Blurred glow effects -->
+  <ellipse cx="80" cy="150" rx="100" ry="80" fill="url(#grad1)" filter="url(#blur1)" opacity="0.45"/>
+  <ellipse cx="320" cy="150" rx="120" ry="90" fill="url(#grad2)" filter="url(#blur1)" opacity="0.35"/>
+  
+  <!-- Header -->
+  <rect x="16" y="16" width="200" height="12" rx="6" fill="#404040"/>
+  <rect x="232" y="16" width="152" height="12" rx="6" fill="#262626"/>
+  
+  <!-- Grid layout with blur -->
+  <!-- Card 1 -->
+  <rect x="16" y="44" width="116" height="80" rx="12" fill="#262626"/>
+  <rect x="24" y="52" width="48" height="48" rx="8" fill="#404040" opacity="0.6"/>
+  <rect x="24" y="52" width="48" height="48" rx="8" fill="url(#grad1)" opacity="0.2" filter="url(#blur1)"/>
+  <rect x="80" y="52" width="44" height="6" rx="3" fill="#525252"/>
+  <rect x="80" y="66" width="32" height="6" rx="3" fill="#525252"/>
+  <rect x="80" y="84" width="44" height="6" rx="3" fill="#525252"/>
+  
+  <!-- Card 2 with lime accent -->
+  <rect x="148" y="44" width="116" height="80" rx="12" fill="#262626" stroke="#a3e635" stroke-width="1" stroke-opacity="0.5"/>
+  <rect x="156" y="52" width="48" height="48" rx="8" fill="#404040" opacity="0.6"/>
+  <rect x="156" y="52" width="48" height="48" rx="8" fill="url(#grad1)" opacity="0.3" filter="url(#blur1)"/>
+  <circle cx="180" cy="76" r="14" fill="#a3e635" fill-opacity="0.8"/>
+  <circle cx="180" cy="76" r="14" fill="url(#grad1)" opacity="0.4" filter="url(#blur1)"/>
+  <rect x="212" y="52" width="44" height="6" rx="3" fill="#525252"/>
+  <rect x="212" y="66" width="28" height="6" rx="3" fill="#525252"/>
+  
+  <!-- Card 3 -->
+  <rect x="280" y="44" width="104" height="80" rx="12" fill="#262626"/>
+  <rect x="288" y="52" width="88" height="36" rx="8" fill="#404040" opacity="0.5"/>
+  <rect x="288" y="52" width="88" height="36" rx="8" fill="url(#grad2)" opacity="0.2" filter="url(#blur1)"/>
+  <rect x="288" y="96" width="88" height="20" rx="6" fill="#a3e635" fill-opacity="0.25"/>
+  <rect x="288" y="96" width="88" height="20" rx="6" fill="url(#grad1)" opacity="0.3" filter="url(#blur1)"/>
+  
+  <!-- Bottom section -->
+  <rect x="16" y="140" width="180" height="144" rx="12" fill="#262626"/>
+  <rect x="24" y="148" width="164" height="60" rx="8" fill="#404040" opacity="0.5"/>
+  <rect x="24" y="148" width="164" height="60" rx="8" fill="url(#grad2)" opacity="0.15" filter="url(#blur1)"/>
+  <rect x="24" y="220" width="60" height="8" rx="4" fill="#a3e635"/>
+  <rect x="24" y="220" width="60" height="8" rx="4" fill="url(#grad1)" opacity="0.3" filter="url(#blur1)"/>
+  <rect x="92" y="220" width="96" height="8" rx="4" fill="#525252"/>
+  <rect x="92" y="236" width="72" height="8" rx="4" fill="#525252"/>
+  
+  <!-- Right sidebar -->
+  <rect x="212" y="140" width="172" height="144" rx="12" fill="#262626" stroke="#a3e635" stroke-width="1" stroke-opacity="0.35"/>
+  <rect x="220" y="148" width="156" height="48" rx="8" fill="#404040" opacity="0.5"/>
+  <rect x="220" y="148" width="156" height="48" rx="8" fill="url(#grad1)" opacity="0.15" filter="url(#blur1)"/>
+  <rect x="220" y="204" width="156" height="32" rx="8" fill="#404040" opacity="0.4"/>
+  <rect x="220" y="204" width="156" height="32" rx="8" fill="url(#grad2)" opacity="0.1" filter="url(#blur1)"/>
+  <rect x="220" y="244" width="156" height="32" rx="8" fill="#404040" opacity="0.4"/>
+  
+  <!-- Floating blur elements -->
+  <circle cx="60" cy="260" r="20" fill="#a3e635" fill-opacity="0.12" filter="url(#blur1)"/>
+  <circle cx="340" cy="260" r="24" fill="#ec4899" fill-opacity="0.15" filter="url(#blur1)"/>
+  
+  <!-- Decorative elements -->
+  <circle cx="356" cy="24" r="4" fill="#ef4444"/>
+  <circle cx="344" cy="24" r="4" fill="#f59e0b"/>
+  <circle cx="332" cy="24" r="4" fill="#22c55e"/>
+  
+  <!-- Small accents -->
+  <rect x="32" y="216" width="8" height="8" rx="2" fill="#a3e635" fill-opacity="0.7"/>
+  <rect x="48" y="216" width="8" height="8" rx="2" fill="#525252"/>
+  <rect x="64" y="216" width="8" height="8" rx="2" fill="#525252"/>
+</svg>

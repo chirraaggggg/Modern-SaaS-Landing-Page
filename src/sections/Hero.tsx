@@ -1,8 +1,8 @@
 "use client";
 
 import Button from "@/components/Button";
-import designExample1Image from "@/assets/images/design-example-1.png";
-import designExample2Image from "@/assets/images/design-example-2.png";
+import designExample1Image from "@/assets/images/design-example-1.svg";
+import designExample2Image from "@/assets/images/design-example-2.svg";
 import Image from "next/image";
 import Pointer from "@/components/Pointer";
 import { motion, useAnimate } from "framer-motion";
@@ -18,7 +18,6 @@ export default function Hero() {
     leftDesignAnimate([
       [leftDesignScope.current, { opacity: [0, 1] }, { duration: 0.5 }],
     ]);
-
     leftPointerAnimate([
       [leftPointerScope.current, { opacity: 1 }, { duration: 0.5, delay: 2.5 }],
       [leftPointerScope.current, { y: 0, x: -100 }, { duration: 0.5 }],
@@ -28,7 +27,7 @@ export default function Hero() {
 
   return (
     <section
-      className="py-24 relative z-20"
+      className="py-24 relative z-20 overflow-hidden"
       style={isDragging ? { cursor: "none" } : undefined}
       onMouseMove={(e) => {
         if (isDragging) {
@@ -36,6 +35,30 @@ export default function Hero() {
         }
       }}
     >
+      {/* Animated floating particles */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-2 h-2 rounded-full bg-lime-400/30"
+            initial={{
+              x: `${(i * 16.67) % 100}%`,
+              y: `${(i * 20) % 100}%`,
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.3, 0.8, 0.3],
+            }}
+            transition={{
+              duration: 3 + (i * 0.5),
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.5,
+            }}
+          />
+        ))}
+      </div>
+
       {/* Custom "You" cursor while dragging — hides native cursor */}
       {isDragging && (
         <>
@@ -52,6 +75,9 @@ export default function Hero() {
         </>
       )}
       <div className="container relative">
+        {/* Decorative gradient lines */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-px bg-gradient-to-r from-transparent via-lime-400/30 to-transparent" />
+        
         <motion.div
           ref={leftDesignScope}
           drag
@@ -98,22 +124,45 @@ export default function Hero() {
           <Pointer name="Michael" color="red" />
         </motion.div>
         <div className="flex justify-center px-4">
-          <div className="inline-flex py-1 px-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full text-neutral-950 font-semibold text-sm sm:text-base">
-            ✨ $7.5M seed round raised
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="inline-flex py-1 px-3 bg-gradient-to-r from-purple-400/20 to-pink-400/20 border border-purple-400/30 rounded-full"
+          >
+            <span className="text-purple-400 mr-2">✨</span>
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent font-semibold text-sm sm:text-base">$7.5M seed round raised</span>
+          </motion.div>
         </div>
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium text-center mt-6 px-4">
-          Impactful design, created effortlessly
-        </h1>
-        <p className="text-center text-base sm:text-lg md:text-xl text-white/50 mt-6 md:mt-8 max-w-2xl mx-auto px-4">
-          Design tools shouldn't slow you down. Layers combine powerful features
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-medium text-center mt-6 px-4"
+        >
+          <span className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent">Impactful design,</span>
+          <br />
+          <span className="text-lime-400">created effortlessly</span>
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-center text-base sm:text-lg md:text-xl text-white/50 mt-6 md:mt-8 max-w-2xl mx-auto px-4"
+        >
+          Design tools shouldn't slow you down. Zuna combine powerful features
           with an intuative interface that keeps you in creative flow.
-        </p>
-        <form className="flex flex-col sm:flex-row border border-white/15 rounded-full p-2 mt-6 md:mt-8 max-w-lg mx-auto overflow-hidden">
+        </motion.p>
+        <motion.form
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.8 }}
+          className="flex flex-col sm:flex-row border border-white/15 rounded-full p-2 mt-6 md:mt-8 max-w-lg mx-auto overflow-hidden bg-neutral-900/50 backdrop-blur-sm"
+        >
           <input
             type="email"
             placeholder="Enter your email"
-            className="bg-transparent flex px-4 py-2 sm:py-0 flex-1 w-full outline-none"
+            className="bg-transparent flex px-4 py-2 sm:py-0 flex-1 w-full outline-none text-white placeholder:text-white/30"
           />
           <Button
             type="submit"
@@ -123,7 +172,28 @@ export default function Hero() {
           >
             Sign Up
           </Button>
-        </form>
+        </motion.form>
+        
+        {/* Additional decorative elements */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="flex justify-center gap-8 mt-12 text-white/30"
+        >
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-lime-400" />
+            <span className="text-sm">Real-time</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-purple-400" />
+            <span className="text-sm">Collaborative</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-pink-400" />
+            <span className="text-sm">Fast</span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

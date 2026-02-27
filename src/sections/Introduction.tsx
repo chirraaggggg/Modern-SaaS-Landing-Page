@@ -47,7 +47,7 @@ export default function Introduction() {
             className="flex justify-center"
             style={{ opacity: tagOpacity, y: tagY }}
           >
-            <Tag>Introducing Layers</Tag>
+            <Tag>Introducing Zuna</Tag>
           </motion.div>
 
           <div className="text-4xl md:text-6xl lg:text-7xl text-center font-medium mt-10">
@@ -79,7 +79,7 @@ export default function Introduction() {
                 scale: closingScale,
               }}
             >
-              That&apos;s why we built Layers.
+              That&apos;s why we built Zuna.
             </motion.span>
           </div>
 
