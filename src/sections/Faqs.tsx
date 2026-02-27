@@ -1,6 +1,8 @@
+
+"use client";
 import Tag from "@/components/Tag";
-import { div } from "framer-motion/client";
-import { tryLoadManifestWithRetries } from "next/dist/server/load-components";
+import { motion } from "framer-motion";
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 
 const faqs = [
@@ -31,8 +33,9 @@ const faqs = [
   },
 ];
 
+
 export default function Faqs() {
-  const selectedIndex = 0;
+  const [open, setOpen] = useState<number | null>(0);
   return (
     <section className="py-24">
       <div className="container">
@@ -44,32 +47,51 @@ export default function Faqs() {
         </h2>
         <div className="mt-12 flex flex-col gap-6 max-w-xl mx-auto">
           {faqs.map((faq, faqIndex) => (
-            <div
+            <motion.div
               key={faq.question}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, delay: faqIndex * 0.10, ease: [0.33,1,0.68,1] }}
               className="bg-neutral-900 rounded-2xl border border-white/10 p-6"
+              layout
             >
-              <div className="flex justify-between items-center">
-                <h3 className="font-medium">{faq.question}</h3>
-                <svg
+              <button
+                className="flex justify-between items-center w-full text-left"
+                onClick={() => setOpen(open === faqIndex ? null : faqIndex)}
+                aria-expanded={open === faqIndex}
+              >
+                <h3 className="font-medium select-none">{faq.question}</h3>
+                <motion.svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={2}
                   stroke="currentColor"
-                  className={twMerge("feather feather-plus text-lime-400 flex-shrink-0 size-6 ml-auto", selectedIndex === faqIndex && "rotate-45")}
+                  className={twMerge("feather feather-plus text-lime-400 flex-shrink-0 size-6 ml-auto", open === faqIndex && "rotate-45")}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   width="24"
                   height="24"
+                  animate={{ rotate: open === faqIndex ? 45 : 0 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 >
                   <line x1="12" y1="5" x2="12" y2="19" />
                   <line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
-              </div>
-              <div className={twMerge("mt-6", selectedIndex !== faqIndex && "hidden")}>
-                <p className="text-white/50">{faq.answer}</p>
-              </div>
-            </div>
+                </motion.svg>
+              </button>
+              <motion.div
+                layout
+                initial={false}
+                animate={open === faqIndex ? { height: "auto", opacity: 1, marginTop: 24 } : { height: 0, opacity: 0, marginTop: 0 }}
+                transition={{ height: { duration: 0.45, ease: [0.33,1,0.68,1] }, opacity: { duration: 0.25 }, marginTop: { duration: 0.3 } }}
+                style={{ overflow: "hidden" }}
+              >
+                <div>
+                  <p className="text-white/50">{faq.answer}</p>
+                </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
       </div>
