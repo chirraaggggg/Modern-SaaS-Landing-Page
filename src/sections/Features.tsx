@@ -66,8 +66,8 @@ export default function Features() {
             className="md:col-span-2 lg:col-span-1"
           >
             <div className="aspect-video inline-flex items-center justify-center">
-                <p className="text-4xl font-extrabold text-white/20 text-center transition-all duration-500 group-hover:text-white/40 group-hover:scale-105">
-                    We've achieved <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent transition-all duration-500 group-hover:from-purple-300 group-hover:to-pink-300">incredible</span> growth this year
+                <p className="text-4xl font-extrabold text-white/20 text-center transition-colors duration-500 group-hover:text-white/40">
+                    We've achieved <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">incredible</span> growth this year
                 </p>
             </div>
           </FeatureCard>
@@ -83,11 +83,25 @@ export default function Features() {
           </FeatureCard>
         </div>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          {features.map((feature) => (
-            <div key={feature} className="bg-neutral-900 border border-white/10 inline-flex px-3 md:px-5 py-1.5 md:py-2 rounded-2xl gap-3 items-center">
-              <span className="bg-lime-400 text-neutral-950 size-5 rounded-full flex items-center justify-center text-xl">&#10038;</span>
+          {features.map((feature, i) => (
+            <motion.div
+              key={feature}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
+              whileHover={{ scale: 1.05, borderColor: "rgba(163, 230, 53, 0.3)" }}
+              className="bg-neutral-900 border border-white/10 inline-flex px-3 md:px-5 py-1.5 md:py-2 rounded-2xl gap-3 items-center cursor-default"
+            >
+              <motion.span
+                className="bg-lime-400 text-neutral-950 size-5 rounded-full flex items-center justify-center text-xl"
+                whileHover={{ rotate: 180 }}
+                transition={{ duration: 0.3 }}
+              >
+                &#10038;
+              </motion.span>
               <span className="font-medium md:text-lg">{feature}</span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -96,46 +110,84 @@ export default function Features() {
 }
 
 const keys = [
-  { label: "shift", className: "w-28" },
+  { label: "shift", className: "w-28 px-5" },
   { label: "alt", className: "" },
   { label: "c", className: "" },
 ];
 
 function AnimatedKeys() {
-  const pressKey = async (el: HTMLElement) => {
-    // Press down with highlight border
+  const pressKey = async (wrapper: HTMLElement) => {
+    const el = wrapper.firstElementChild as HTMLElement;
+    if (!el) return;
+
+    // Press down — realistic key sink with depth loss
     await el.animate(
       [
-        { transform: "translateY(0) scale(1)", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.2)", outline: "2px solid transparent", outlineOffset: "2px" },
-        { transform: "translateY(4px) scale(0.95)", boxShadow: "0 1px 0 0 rgba(0,0,0,0.4)", outline: "2px solid #a3e635", outlineOffset: "2px" },
+        {
+          transform: "translateY(0px)",
+          borderBottomWidth: "3px",
+          boxShadow: "0 2px 0 0 rgba(0,0,0,0.15), inset 0 1px 0 0 rgba(255,255,255,0.5)",
+          filter: "brightness(1)",
+        },
+        {
+          transform: "translateY(2px)",
+          borderBottomWidth: "1px",
+          boxShadow: "0 0 0 0 rgba(0,0,0,0.05), inset 0 2px 4px rgba(0,0,0,0.2)",
+          filter: "brightness(0.92)",
+        },
       ],
-      { duration: 100, fill: "forwards", easing: "ease-in" }
+      { duration: 60, fill: "forwards", easing: "cubic-bezier(0.4, 0, 1, 1)" }
     ).finished;
 
-    // Release with bounce, keep highlight briefly
+    // Flash highlight ring
+    wrapper.style.outline = "2px solid #a3e635";
+    wrapper.style.outlineOffset = "1px";
+    wrapper.style.borderRadius = "12px";
+
+    // Hold at bottom
+    await new Promise((r) => setTimeout(r, 80));
+
+    // Release — bounce back up
     await el.animate(
       [
-        { transform: "translateY(4px) scale(0.95)", boxShadow: "0 1px 0 0 rgba(0,0,0,0.4)", outline: "2px solid #a3e635", outlineOffset: "2px" },
-        { transform: "translateY(-4px) scale(1.02)", boxShadow: "0 6px 12px -2px rgba(0,0,0,0.3), 0 0 20px rgba(163,230,53,0.15)", outline: "2px solid #a3e635", outlineOffset: "3px" },
-        { transform: "translateY(0) scale(1)", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.2)", outline: "2px solid transparent", outlineOffset: "2px" },
+        {
+          transform: "translateY(2px)",
+          borderBottomWidth: "1px",
+          boxShadow: "0 0 0 0 rgba(0,0,0,0.05), inset 0 2px 4px rgba(0,0,0,0.2)",
+          filter: "brightness(0.92)",
+        },
+        {
+          transform: "translateY(-2px)",
+          borderBottomWidth: "4px",
+          boxShadow: "0 4px 8px -2px rgba(0,0,0,0.2), 0 0 16px rgba(163,230,53,0.25)",
+          filter: "brightness(1.05)",
+        },
+        {
+          transform: "translateY(0px)",
+          borderBottomWidth: "3px",
+          boxShadow: "0 2px 0 0 rgba(0,0,0,0.15), inset 0 1px 0 0 rgba(255,255,255,0.5)",
+          filter: "brightness(1)",
+        },
       ],
-      { duration: 350, fill: "forwards", easing: "ease-out" }
+      { duration: 300, fill: "forwards", easing: "cubic-bezier(0.34, 1.56, 0.64, 1)" }
     ).finished;
+
+    // Fade out highlight ring
+    wrapper.style.outline = "2px solid transparent";
   };
 
   return (
-    <div className="flex items-center justify-center gap-4">
+    <div className="flex items-center justify-center gap-3 pl-4">
       {keys.map((key) => (
-        <motion.div
+        <div
           key={key.label}
-          style={{ boxShadow: "0 4px 6px -1px rgba(0,0,0,0.2)" }}
-          className="rounded-2xl cursor-pointer select-none"
+          className="rounded-xl cursor-pointer select-none active:cursor-default"
           onMouseDown={(e) => pressKey(e.currentTarget as HTMLElement)}
         >
           <Key className={key.className}>
             {key.label}
           </Key>
-        </motion.div>
+        </div>
       ))}
     </div>
   );
