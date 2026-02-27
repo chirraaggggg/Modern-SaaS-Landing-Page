@@ -1,3 +1,5 @@
+"use client";
+
 import Tag from "@/components/Tag";
 import FeatureCard from "@/components/FeatureCard";
 import avatar1 from "@/assets/images/avatar-ashwin-santiago.jpg";
@@ -6,6 +8,8 @@ import avatar3 from "@/assets/images/avatar-florence-shaw.jpg";
 import Image from "next/image";
 import Avatar from "@/components/Avatar";
 import Key from "@/components/Key";
+import { motion, useAnimate } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const features = [
   "Asset Library",
@@ -34,16 +38,16 @@ export default function Features() {
             className="md:col-span-2 lg:col-span-1"
           >
             <div className="aspect-video flex items-center justify-center">
-              <Avatar className="z-40">
+              <Avatar className="z-40 transition-transform duration-300 group-hover:-translate-y-2 group-hover:scale-110">
                 <Image src={avatar1} alt="Avatar 1" className="rounded-full" />
               </Avatar>
-              <Avatar className="-ml-6 border-indigo-500 z-30">
+              <Avatar className="-ml-6 border-indigo-500 z-30 transition-transform duration-500 group-hover:-translate-y-3 group-hover:scale-110">
                 <Image src={avatar2} alt="Avatar 2" className="rounded-full" />
               </Avatar>
-              <Avatar className="-ml-6 border-amber-500 z-20">
+              <Avatar className="-ml-6 border-amber-500 z-20 transition-transform duration-700 group-hover:-translate-y-2 group-hover:scale-110">
                 <Image src={avatar3} alt="Avatar 3" className="rounded-full" />
               </Avatar>
-              <Avatar className="-ml-6 border-transparent">
+              <Avatar className="-ml-6 border-transparent transition-transform duration-700 group-hover:translate-x-1">
                 <div className="size-full bg-neutral-700 rounded-full inline-flex items-center justify-center gap-1">
                     {Array.from({ length: 3}).map((_, i) => (
                         <span
@@ -62,8 +66,8 @@ export default function Features() {
             className="md:col-span-2 lg:col-span-1"
           >
             <div className="aspect-video inline-flex items-center justify-center">
-                <p className="text-4xl font-extrabold text-white/20 text-center">
-                    We've achieved <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">incredible</span> growth this year
+                <p className="text-4xl font-extrabold text-white/20 text-center transition-all duration-500 group-hover:text-white/40 group-hover:scale-105">
+                    We've achieved <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent transition-all duration-500 group-hover:from-purple-300 group-hover:to-pink-300">incredible</span> growth this year
                 </p>
             </div>
           </FeatureCard>
@@ -74,9 +78,7 @@ export default function Features() {
             className="md:col-span-2 md:col-start-2 lg:col-span-1 lg:col-start-auto"
             >
             <div className="aspect-video inline-flex items-center justify-center gap-4">
-                <Key className="w-28">shift</Key>
-                <Key>alt</Key>
-                <Key>c</Key>
+                <AnimatedKeys />
             </div>
           </FeatureCard>
         </div>
@@ -90,5 +92,51 @@ export default function Features() {
         </div>
       </div>
     </section>
+  );
+}
+
+const keys = [
+  { label: "shift", className: "w-28" },
+  { label: "alt", className: "" },
+  { label: "c", className: "" },
+];
+
+function AnimatedKeys() {
+  const pressKey = async (el: HTMLElement) => {
+    // Press down with highlight border
+    await el.animate(
+      [
+        { transform: "translateY(0) scale(1)", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.2)", outline: "2px solid transparent", outlineOffset: "2px" },
+        { transform: "translateY(4px) scale(0.95)", boxShadow: "0 1px 0 0 rgba(0,0,0,0.4)", outline: "2px solid #a3e635", outlineOffset: "2px" },
+      ],
+      { duration: 100, fill: "forwards", easing: "ease-in" }
+    ).finished;
+
+    // Release with bounce, keep highlight briefly
+    await el.animate(
+      [
+        { transform: "translateY(4px) scale(0.95)", boxShadow: "0 1px 0 0 rgba(0,0,0,0.4)", outline: "2px solid #a3e635", outlineOffset: "2px" },
+        { transform: "translateY(-4px) scale(1.02)", boxShadow: "0 6px 12px -2px rgba(0,0,0,0.3), 0 0 20px rgba(163,230,53,0.15)", outline: "2px solid #a3e635", outlineOffset: "3px" },
+        { transform: "translateY(0) scale(1)", boxShadow: "0 4px 6px -1px rgba(0,0,0,0.2)", outline: "2px solid transparent", outlineOffset: "2px" },
+      ],
+      { duration: 350, fill: "forwards", easing: "ease-out" }
+    ).finished;
+  };
+
+  return (
+    <div className="flex items-center justify-center gap-4">
+      {keys.map((key) => (
+        <motion.div
+          key={key.label}
+          style={{ boxShadow: "0 4px 6px -1px rgba(0,0,0,0.2)" }}
+          className="rounded-2xl cursor-pointer select-none"
+          onMouseDown={(e) => pressKey(e.currentTarget as HTMLElement)}
+        >
+          <Key className={key.className}>
+            {key.label}
+          </Key>
+        </motion.div>
+      ))}
+    </div>
   );
 }
