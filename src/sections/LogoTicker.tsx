@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import quantumLogo from "@/assets/images/quantum.svg";
 import acmeLogo from "@/assets/images/acme-corp.svg";
@@ -7,6 +9,7 @@ import outsideLogo from "@/assets/images/outside.svg";
 import apexLogo from "@/assets/images/apex.svg";
 import celestialLogo from "@/assets/images/celestial.svg";
 import twiceLogo from "@/assets/images/twice.svg";
+import { motion } from "framer-motion";
 
 const logos = [
   { name: "Quantum", image: quantumLogo },
@@ -27,11 +30,35 @@ export default function LogoTicker() {
           Already chosen by these market leaders{" "}
         </h3>
         <div className="overflow-hidden mt-12 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex gap-24 pr-24">
+          <motion.div
+            className="flex gap-24 pr-24"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{
+              x: {
+                duration: 15,
+                repeat: Infinity,
+                ease: "linear",
+              },
+            }}
+          >
             {logos.map((logo) => (
-              <Image src={logo.image} key={logo.name} alt={logo.name} />
+              <Image
+                src={logo.image}
+                key={logo.name}
+                alt={logo.name}
+                className="flex-none"
+              />
             ))}
-          </div>
+            {/* Duplicate for seamless loop */}
+            {logos.map((logo) => (
+              <Image
+                src={logo.image}
+                key={`${logo.name}-dup`}
+                alt={logo.name}
+                className="flex-none"
+              />
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
