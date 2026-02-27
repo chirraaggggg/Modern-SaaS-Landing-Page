@@ -26,12 +26,12 @@ export default function LogoTicker() {
   return (
     <section className="py-24 overflow-x-clip">
       <div className="container">
-        <h3 className="text-center text-white/50 text-xl">
+        <h3 className="text-center text-white/50 text-base sm:text-lg md:text-xl px-4">
           Already chosen by these market leaders{" "}
         </h3>
-        <div className="overflow-hidden mt-12 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+        <div className="overflow-hidden mt-8 md:mt-12 [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
           <motion.div
-            className="flex gap-24 pr-24"
+            className="flex gap-12 sm:gap-16 md:gap-20 lg:gap-24 pr-12 sm:pr-16 md:pr-20 lg:pr-24"
             animate={{ x: ["0%", "-50%"] }}
             transition={{
               x: {
@@ -46,7 +46,7 @@ export default function LogoTicker() {
                 src={logo.image}
                 key={logo.name}
                 alt={logo.name}
-                className="flex-none"
+                className="flex-none h-8 w-16 sm:h-10 sm:w-20 md:h-12 md:w-24 lg:h-16 lg:w-32"
               />
             ))}
             {/* Duplicate for seamless loop */}
@@ -55,7 +55,7 @@ export default function LogoTicker() {
                 src={logo.image}
                 key={`${logo.name}-dup`}
                 alt={logo.name}
-                className="flex-none"
+                className="flex-none h-8 w-16 sm:h-10 sm:w-20 md:h-12 md:w-24 lg:h-16 lg:w-32"
               />
             ))}
           </motion.div>

@@ -63,14 +63,14 @@ export default function Hero() {
           initial={{ opacity: 0, x: -200 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, delay: 1.5, ease: "easeOut" }}
-          className="absolute -left-72 top-16 hidden lg:block cursor-grab active:cursor-grabbing z-50"
+          className="absolute -left-32 sm:-left-48 md:-left-72 top-8 md:top-16 hidden lg:block cursor-grab active:cursor-grabbing z-50"
         >
           <Image src={designExample1Image} alt="Design example 1 image" draggable={false} />
         </motion.div>
         <motion.div
           ref={leftPointerScope}
           initial={{ opacity: 0, y: 100, x: -200 }}
-          className="absolute left-56 top-96 hidden lg:block"
+          className="absolute left-32 sm:left-40 md:left-56 top-64 sm:top-80 md:top-96 hidden lg:block"
         >
           <Pointer name="Andrea" />
         </motion.div>
@@ -85,7 +85,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 100, x: 100 }}
           animate={{ opacity: 1, y: 0, x: 0 }}
           transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
-          className="absolute -right-80 -top-16 hidden lg:block cursor-grab active:cursor-grabbing z-50"
+          className="absolute -right-32 sm:-right-48 md:-right-80 -top-8 md:-top-16 hidden lg:block cursor-grab active:cursor-grabbing z-50"
         >
           <Image src={designExample2Image} alt="Design example 2 image" draggable={false} />
         </motion.div>
@@ -93,32 +93,32 @@ export default function Hero() {
           initial={{ opacity: 0, x: 275, y: 100 }}
           animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 0.8, delay: 2.5, ease: "easeOut" }}
-          className="absolute right-80 -top-4 hidden lg:block"
+          className="absolute right-32 sm:right-40 md:right-80 -top-2 md:-top-4 hidden lg:block"
         >
           <Pointer name="Michael" color="red" />
         </motion.div>
-        <div className="flex justify-center">
-          <div className="inline-flex py-1 px-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full text-neutral-950 font-semibold">
+        <div className="flex justify-center px-4">
+          <div className="inline-flex py-1 px-3 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full text-neutral-950 font-semibold text-sm sm:text-base">
             ✨ $7.5M seed round raised
           </div>
         </div>
-        <h1 className="text-6xl md:text-7xl lg:text-8xl font-medium text-center mt-6">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-medium text-center mt-6 px-4">
           Impactful design, created effortlessly
         </h1>
-        <p className="text-center text-xl text-white/50 mt-8 max-w-2xl mx-auto">
+        <p className="text-center text-base sm:text-lg md:text-xl text-white/50 mt-6 md:mt-8 max-w-2xl mx-auto px-4">
           Design tools shouldn't slow you down. Layers combine powerful features
           with an intuative interface that keeps you in creative flow.
         </p>
-        <form className="flex border border-white/15 rounded-full p-2 mt-8 max-w-lg mx-auto overflow-hidden">
+        <form className="flex flex-col sm:flex-row border border-white/15 rounded-full p-2 mt-6 md:mt-8 max-w-lg mx-auto overflow-hidden">
           <input
             type="email"
             placeholder="Enter your email"
-            className="bg-transparent flex px-4 md:flex-1 w-full"
+            className="bg-transparent flex px-4 py-2 sm:py-0 flex-1 w-full outline-none"
           />
           <Button
             type="submit"
             variant="primary"
-            className="whitespace-nowrap"
+            className="whitespace-nowrap w-full sm:w-auto mt-2 sm:mt-0"
             size="sm"
           >
             Sign Up

@@ -28,14 +28,14 @@ export default function Features() {
         <div className="flex justify-center">
           <Tag>Features</Tag>
         </div>
-        <h2 className="text-6xl font-medium text-center mt-6 lg:max-w-2xl mx-auto">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium text-center mt-6 lg:max-w-2xl mx-auto px-4">
           Where power meets <span className="text-lime-400">simplicity</span>
         </h2>
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-3 gap-8">
+        <div className="mt-8 md:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
           <FeatureCard
             title="Real-time Collaboration"
             description="Work together seamlessly with conflict-free team editing"
-            className="md:col-span-2 lg:col-span-1"
+            className="sm:col-span-2 lg:col-span-1"
           >
             <div className="aspect-video flex items-center justify-center">
               <Avatar className="z-40 transition-transform duration-300 group-hover:-translate-y-2 group-hover:scale-110">
@@ -63,7 +63,7 @@ export default function Features() {
           <FeatureCard
             title="Interactive Prototyping"
             description="Engage with your clients with prototypes that react to user interactions"
-            className="md:col-span-2 lg:col-span-1"
+            className="sm:col-span-2 lg:col-span-1"
           >
             <div className="aspect-video inline-flex items-center justify-center">
                 <p className="text-4xl font-extrabold text-white/20 text-center transition-colors duration-500 group-hover:text-white/40">
@@ -75,14 +75,14 @@ export default function Features() {
           <FeatureCard
             title="Keyboard Quick Actions"
             description="Powerful command to help you create designs more quickly"
-            className="md:col-span-2 md:col-start-2 lg:col-span-1 lg:col-start-auto"
+            className="sm:col-span-2 sm:col-start-2 lg:col-span-1 lg:col-start-auto"
             >
             <div className="aspect-video inline-flex items-center justify-center gap-4">
                 <AnimatedKeys />
             </div>
           </FeatureCard>
         </div>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="mt-6 md:mt-8 flex flex-wrap justify-center gap-2 md:gap-3 px-4">
           {features.map((feature, i) => (
             <motion.div
               key={feature}
@@ -91,7 +91,7 @@ export default function Features() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.1, ease: "easeOut" }}
               whileHover={{ scale: 1.05, borderColor: "rgba(163, 230, 53, 0.3)" }}
-              className="bg-neutral-900 border border-white/10 inline-flex px-3 md:px-5 py-1.5 md:py-2 rounded-2xl gap-3 items-center cursor-default"
+              className="bg-neutral-900 border border-white/10 inline-flex px-2 py-1 sm:px-3 sm:py-1.5 md:px-5 md:py-2 rounded-2xl gap-2 sm:gap-3 items-center cursor-default"
             >
               <motion.span
                 className="bg-lime-400 text-neutral-950 size-5 rounded-full flex items-center justify-center text-xl"
@@ -100,7 +100,7 @@ export default function Features() {
               >
                 &#10038;
               </motion.span>
-              <span className="font-medium md:text-lg">{feature}</span>
+              <span className="font-medium text-sm sm:text-base md:text-lg">{feature}</span>
             </motion.div>
           ))}
         </div>
